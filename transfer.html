@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-color: #111827;
+      --card-bg: rgba(31, 41, 55, 0.9);
+      --text-color: #f9fafb;
+      --accent-color: #8525eb;      /* น้ำเงิน */
+      --accent-hover: #9f3bf6;
+      --input-bg: #1f2937;
+      --error-color: #f87171;
+    }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    .form-card { background-color: var(--card-bg); }
+    .input-field {
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      border: 1px solid #374151;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-field:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px var(--accent-hover);
+      outline: none;
+    }
+    .btn-accent {
+      background-color: var(--accent-color);
+      transition: background-color 0.2s;
+    }
+    .btn-accent:hover {
+      background-color: var(--accent-hover);
+    }
+    .error-text { color: var(--error-color); font-size: 0.875rem; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+
+  <form id="transferForm" class="form-card p-8 rounded-xl shadow-lg w-full max-w-md space-y-6">
+    <h2 class="text-2xl font-bold text-center">📄 คำร้องขอโอนย้ายสาขา</h2>
+
+    <div>
+      <label class="block mb-1">รหัสนักศึกษา</label>
+      <input type="text" id="studentId" class="input-field w-full p-2 rounded" pattern="[0-9]{10}" placeholder="เช่น 6704101234" required>
+      <span id="idError" class="error-text"></span>
+    </div>
+
+    <div>
+      <label class="block mb-1">ชื่อ-นามสกุล</label>
+      <input type="text" id="fullname" class="input-field w-full p-2 rounded" required>
+      <span id="nameError" class="error-text"></span>
+    </div>
+
+    <div>
+      <label class="block mb-1">คณะปัจจุบัน</label>
+      <input type="text" id="currentFaculty" class="input-field w-full p-2 rounded" required>
+    </div>
+
+    <div>
+      <label class="block mb-1">คณะใหม่</label>
+      <input type="text" id="newFaculty" class="input-field w-full p-2 rounded" required>
+    </div>
+
+    <div>
+      <label class="block mb-1">เหตุผลการโอนย้าย</label>
+      <textarea id="reason" class="input-field w-full p-2 rounded" minlength="10" required></textarea>
+      <span id="reasonError" class="error-text"></span>
+    </div>
+
+    <button type="submit" class="btn-accent text-white font-semibold w-full py-2 rounded">ส่งคำร้อง</button>
+  </form>
+
+  <!-- Modal -->
+  <div id="transferModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div class="form-card p-6 rounded-lg shadow-lg text-center w-80">
+      <h3 class="text-lg font-bold text-blue-400 mb-4">✅ ส่งคำร้องสำเร็จ</h3>
+      <p id="transferMessage"></p>
+      <button id="closeTransferModal" class="btn-accent text-white px-4 py-2 rounded mt-4">ปิด</button>
+    </div>
+  </div>
+
+<script>
+  const form = document.getElementById('transferForm');
+  const studentId = document.getElementById('studentId');
+  const fullname = document.getElementById('fullname');
+  const reason = document.getElementById('reason');
+
+  const idError = document.getElementById('idError');
+  const nameError = document.getElementById('nameError');
+  const reasonError = document.getElementById('reasonError');
+
+  const modal = document.getElementById('transferModal');
+  const transferMessage = document.getElementById('transferMessage');
+  const closeModal = document.getElementById('closeTransferModal');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let isValid = true;
+
+    idError.textContent = '';
+    nameError.textContent = '';
+    reasonError.textContent = '';
+
+    if (!/^[0-9]{10}$/.test(studentId.value)) {
+      idError.textContent = 'รหัสนักศึกษาต้องมี 10 หลักเป็นตัวเลข';
+      isValid = false;
+    }
+    if (fullname.value.trim().split(' ').length < 2) {
+      nameError.textContent = 'กรุณากรอกชื่อ-นามสกุลอย่างน้อย 2 คำ';
+      isValid = false;
+    }
+    if (reason.value.trim().length < 10) {
+      reasonError.textContent = 'เหตุผลต้องมีอย่างน้อย 10 ตัวอักษร';
+      isValid = false;
+    }
+
+    if (isValid) {
+      transferMessage.textContent = `รหัส ${studentId.value} ส่งคำร้องสำเร็จ`;
+      modal.classList.remove('hidden');
+    }
+  });
+
+  closeModal.addEventListener('click', () => modal.classList.add('hidden'));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+</script>
+</body>
+</html>
