@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WELCOME - หน้าแรก</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-color: #111827;       /* พื้นหลังเทาเข้ม */
+      --card-bg: rgba(31, 41, 55, 0.9); /* การ์ดสีเข้มโปร่ง */
+      --text-color: #f9fafb;     /* ข้อความสีอ่อน */
+      --accent-color: #3b82f6;   /* ฟ้าหลัก */
+      --accent-hover: #60a5fa;   /* ฟ้า hover */
+      --input-bg: #1f2937;       /* อินพุตสีเข้ม */
+      --error-color: #f87171;    /* แดงแจ้ง error */
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgb(31 41 55 / 0.6);
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--accent-color);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 8px var(--accent-color);
+    }
+
+    p.subtitle {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+
+    a.btn-accent {
+      display: block;
+      background-color: var(--accent-color);
+      color: var(--text-color);
+      font-weight: 600;
+      padding: 0.75rem 0;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px var(--accent-color);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    a.btn-accent:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 0 0 16px var(--accent-hover);
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-color);
+      opacity: 0.6;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <h1>WELCOME</h1>
+    <p class="subtitle">ยินดีต้อนรับสู่เว็บไซต์ของเรา</p>
+
+    <a href="event.html" target="_blank" rel="noopener" class="btn-accent">EVENT</a>
+    <a href="health.html" target="_blank" rel="noopener" class="btn-accent">HEALTH</a>
+    <a href="transfer.html" target="_blank" rel="noopener" class="btn-accent">TRANSFER</a>
+
+    <footer>&copy; 2025 Maejo University</footer>
+  </main>
+
+</body>
+</html>
